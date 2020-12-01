@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <errno.h>
 
-int MAX_LAENGE = 1000;
+int MAX_LAENGE = 500;
 
 int read_array_from_file(int array[], size_t size, char *filename) {
     FILE *file_pointer = fopen(filename, "r");
@@ -30,24 +30,19 @@ int main(int argc, char *argv[]) {
     char *filename = argv[1];
 
     int input_array[MAX_LAENGE];
-    int output_array[MAX_LAENGE];
-    int sum;
     int len = read_array_from_file(input_array, MAX_LAENGE, filename);
-    for (int i = 0; i < len; i++) {
-        int k, amount = 0;
-        output_array[i] = input_array[i];
-
-        
-        while (output_array[k] > 0) {
-            
-            output_array[k + 1] = (output_array[k] / 3) - 2;
-            k++;
-            amount++;
-        }
+    int sum = 0;
     
-        for (int j = 0; j < amount; j++) {
-            sum = sum + output_array[j];
+    for (int i = 0; i < len - 2; i++) {
+        for (int j = 1; j < len -1; j++) {
+            for (int k = 2; k < len; k++) {
+                if (input_array[i] + input_array[j] + input_array[k] == 2020) {
+                    sum = input_array[i]*input_array[j]*input_array[k];
+                    break;
+                }
+            }
         }
     }
+    
     printf("%d \n", sum);
 } 
